@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
 describe("Text", () => {
   it("renders correctly", () => {
     const text = (
-      <Text fill="white" fontFamily="Arial" fontSize={48}>
+      <Text fill="white" fontFamily="Inter" fontSize={48}>
         hello
       </Text>
     );
@@ -17,7 +17,7 @@ describe("Text", () => {
 
   it("renders with custom position correctly", () => {
     const text = (
-      <Text fill="white" fontFamily="Arial" fontSize={48} x={32} y={32}>
+      <Text fill="white" fontFamily="Inter" fontSize={48} x={32} y={32}>
         hello
       </Text>
     );
@@ -28,7 +28,7 @@ describe("Text", () => {
 
   it("handles multiple children correctly", () => {
     const text = (
-      <Text fill="white" fontFamily="Arial" fontSize={48}>
+      <Text fill="white" fontFamily="Inter" fontSize={48}>
         {"hello"}
         {"world!"}
       </Text>
@@ -41,7 +41,7 @@ describe("Text", () => {
   it("handles multiline correctly", () => {
     const text = (
       <Rect fill="red">
-        <Text fill="white" fontFamily="Arial" fontSize={48}>
+        <Text fill="white" fontFamily="Inter" fontSize={48}>
           {"hello\nworld!"}
         </Text>
       </Rect>
@@ -53,7 +53,7 @@ describe("Text", () => {
 
   it("calculates bounding box correctly", () => {
     const text = (
-      <Text fill="white" fontFamily="Arial" fontSize={48}>
+      <Text fill="white" fontFamily="Inter" fontSize={48}>
         hello
       </Text>
     );
@@ -65,7 +65,7 @@ describe("Text", () => {
 
   it("calculates bounding box of multiline text correctly", () => {
     const text = (
-      <Text fill="white" fontFamily="Arial" fontSize={48}>
+      <Text fill="white" fontFamily="Inter" fontSize={48}>
         {"hello\nworld"}
       </Text>
     );
@@ -76,7 +76,7 @@ describe("Text", () => {
   });
 
   it("handles null children correctly", () => {
-    const text = <Text fill="white" fontFamily="Arial" fontSize={48}></Text>;
+    const text = <Text fill="white" fontFamily="Inter" fontSize={48}></Text>;
 
     const canvas = render(256, 256, text);
     expect(canvas.toBufferSync("png")).toMatchImageSnapshot();

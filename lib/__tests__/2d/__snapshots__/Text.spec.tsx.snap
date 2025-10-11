@@ -2,14 +2,14 @@
 
 exports[`Text > calculates bounding box correctly 1`] = `
 {
-  "height": 46.23828125,
-  "width": 101.41000366210938,
+  "height": 48.5,
+  "width": 108.37999725341797,
 }
 `;
 
 exports[`Text > calculates bounding box of multiline text correctly 1`] = `
 {
-  "height": 101.43359375,
-  "width": 114.69999694824219,
+  "height": 106.578125,
+  "width": 127.01000213623047,
 }
 `;
