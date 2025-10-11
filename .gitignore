@@ -1,2 +1,4 @@
 node_modules/
 example.png
+dist/
+lib/__tests__/**/__image_snapshots__/__diff_output__

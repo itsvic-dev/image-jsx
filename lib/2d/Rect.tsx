@@ -32,6 +32,11 @@ class RectRenderer implements DirectRenderer {
 
     // render children
     for (const child of this.children) {
+      // reposition children
+      child.pos = {
+        x: child.pos.x + this.pos.x,
+        y: child.pos.y + this.pos.y,
+      };
       child.render(context);
     }
   }
@@ -76,6 +81,8 @@ const Rect = ({
     }
 
     return new RectRenderer(props, children as DirectRenderer[]);
+  } else if (children === undefined) {
+    return new RectRenderer(props, []);
   } else {
     if (
       !(

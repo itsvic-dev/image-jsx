@@ -4,15 +4,20 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.14.0",
   "devDependencies": {
+    "@types/jest-image-snapshot": "^6.4.0",
     "@types/node": "^24.7.2",
-    "tsx": "^4.20.6"
+    "jest-image-snapshot": "^6.5.1",
+    "tsx": "^4.20.6",
+    "vite": "^7.1.9",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "skia-canvas": "^3.0.8",

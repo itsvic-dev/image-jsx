@@ -1,0 +1,45 @@
+import { Rect } from "@lib/2d";
+import { describe, expect, it } from "vitest";
+import { render } from "@lib";
+import { toMatchImageSnapshot } from "jest-image-snapshot";
+
+expect.extend({ toMatchImageSnapshot });
+
+describe("Rect", () => {
+  it("handles custom widths", () => {
+    const rect = <Rect fill={"red"} w={256} h={256} />;
+
+    const canvas = render(256, 256, rect);
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+  });
+
+  it("handles custom positions", () => {
+    const rect = <Rect fill={"red"} w={128} h={128} x={64} y={64} />;
+
+    const canvas = render(256, 256, rect);
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+  });
+
+  it("resizes to children", () => {
+    const rect = (
+      <Rect fill={"red"}>
+        <Rect fill={"#00ff0080"} w={128} h={256}></Rect>
+        <Rect fill={"#0000ff80"} w={256} h={128}></Rect>
+      </Rect>
+    );
+
+    const canvas = render(256, 256, rect);
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+  });
+
+  it("repositions children", () => {
+    const rect = (
+      <Rect fill={"red"} w={128} h={128} x={64} y={64}>
+        <Rect fill={"aqua"} w={128} h={64}></Rect>
+      </Rect>
+    );
+
+    const canvas = render(256, 256, rect);
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+  });
+});
