@@ -28,15 +28,17 @@ class LayoutRenderer implements DirectRenderer {
   }
 
   render(ctx: CanvasRenderingContext2D): void {
-    if (this.props.direction === "horizontal") {
-      throw new Error("horizontal direction not implemented");
-    }
+    let cursor = 0;
 
-    let curY = 0;
     for (const child of this.children) {
       const bbox = child.getBoundingBox(ctx);
-      child.pos = { x: this.pos.x, y: this.pos.y + curY };
-      curY += bbox.height + (this.props.gap ?? 0);
+      if (this.props.direction === "horizontal") {
+        child.pos = { x: this.pos.x + cursor, y: this.pos.y };
+        cursor += bbox.width + (this.props.gap ?? 0);
+      } else {
+        child.pos = { x: this.pos.x, y: this.pos.y + cursor };
+        cursor += bbox.height + (this.props.gap ?? 0);
+      }
       child.render(ctx);
     }
   }
@@ -45,10 +47,6 @@ class LayoutRenderer implements DirectRenderer {
     width: number;
     height: number;
   } {
-    if (this.props.direction === "horizontal") {
-      throw new Error("horizontal direction not implemented");
-    }
-
     // calculate gaps for children
     const gaps = Math.max(0, this.children.length - 1) * (this.props.gap || 0);
 
@@ -57,11 +55,20 @@ class LayoutRenderer implements DirectRenderer {
 
     for (const child of this.children) {
       const bbox = child.getBoundingBox(context);
-      width = Math.max(width, bbox.width);
-      height += bbox.height;
+      if (this.props.direction === "horizontal") {
+        width += bbox.width;
+        height = Math.max(height, bbox.height);
+      } else {
+        width = Math.max(width, bbox.width);
+        height += bbox.height;
+      }
     }
 
-    return { width, height: height + gaps };
+    if (this.props.direction === "horizontal") {
+      return { width: width + gaps, height };
+    } else {
+      return { width, height: height + gaps };
+    }
   }
 }
 
