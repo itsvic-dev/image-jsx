@@ -41,16 +41,26 @@ class TextRenderer implements DirectRenderer {
     height: number;
   } {
     this.setupCtx(ctx);
-    const metrics = ctx.measureText(this.text);
-    return {
-      width: metrics.width,
-      height: metrics.actualBoundingBoxDescent,
-    };
+    let width = 0;
+    let height = 0;
+    let curY = 0;
+    for (const line of this.text.split("\n")) {
+      const metrics = ctx.measureText(line);
+      width = Math.max(width, metrics.width);
+      height = Math.max(height, curY + metrics.actualBoundingBoxDescent);
+      curY += metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+    }
+    return { width, height };
   }
 
   render(ctx: CanvasRenderingContext2D): void {
     this.setupCtx(ctx);
-    ctx.fillText(this.text, this.pos.x, this.pos.y);
+    let curY = this.pos.y;
+    for (const line of this.text.split("\n")) {
+      const metrics = ctx.measureText(line);
+      ctx.fillText(line, this.pos.x, curY);
+      curY += metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+    }
   }
 }
 

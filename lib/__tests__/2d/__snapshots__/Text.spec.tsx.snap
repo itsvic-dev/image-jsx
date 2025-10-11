@@ -6,3 +6,10 @@ exports[`Text > calculates bounding box correctly 1`] = `
   "width": 101.41000366210938,
 }
 `;
+
+exports[`Text > calculates bounding box of multiline text correctly 1`] = `
+{
+  "height": 101.43359375,
+  "width": 114.69999694824219,
+}
+`;
