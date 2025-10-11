@@ -34,6 +34,7 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "@lib",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
@@ -41,7 +42,9 @@
     "skipLibCheck": true,
 
     "paths": {
-      "@lib/": ["./lib/"],
+      "@lib": ["./lib/default.js"],
+      "@lib/2d": ["./lib/2d/default.js"],
+      "@lib/jsx-runtime": ["./lib/jsx-runtime.js"],
     }
   }
 }
