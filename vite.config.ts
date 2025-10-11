@@ -23,6 +23,7 @@ export default defineConfig({
       entry: {
         index: resolve(__dirname, "lib/index.ts"),
         "jsx-runtime": resolve(__dirname, "lib/jsx-runtime.ts"),
+        "jsx-dev-runtime": resolve(__dirname, "lib/jsx-dev-runtime.ts"),
         "2d": resolve(__dirname, "lib/2d/index.ts"),
       },
       fileName: (format, entry) =>
