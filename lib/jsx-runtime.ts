@@ -4,3 +4,5 @@ import type { ComponentProps, FunctionComponent, JSXChild } from "./types.js";
 export function jsx(type: FunctionComponent, props: ComponentProps): JSXChild {
   return type(props);
 }
+
+export { jsx as jsxs };

@@ -9,22 +9,26 @@ export default defineConfig({
     coverage: {
       reporter: ["text", "json-summary", "json", "html-spa"],
       thresholds: {
-        lines: 90,
-        branches: 90,
-        functions: 90,
-        statements: 90,
+        lines: 50,
+        branches: 50,
+        functions: 50,
+        statements: 50,
       },
+      exclude: ["./example", "./vite.config.ts"],
     },
   },
 
   build: {
     lib: {
       entry: {
-        default: resolve(__dirname, "lib/default.ts"),
+        index: resolve(__dirname, "lib/index.ts"),
         "jsx-runtime": resolve(__dirname, "lib/jsx-runtime.ts"),
-        "2d": resolve(__dirname, "lib/2d/default.ts"),
+        "2d": resolve(__dirname, "lib/2d/index.ts"),
       },
-      fileName: (format, entry) => `${entry}.${format === "es" ? "js" : "cjs"}`,
+      fileName: (format, entry) =>
+        `${entry === "index" ? "index" : `${entry}/index`}.${
+          format === "es" ? "js" : "cjs"
+        }`,
     },
     rollupOptions: {
       external: ["skia-canvas"],

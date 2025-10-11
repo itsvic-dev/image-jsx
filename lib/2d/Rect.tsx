@@ -1,5 +1,6 @@
 import type { CanvasRenderingContext2D } from "skia-canvas";
 import type { DirectRenderer, JSXChildren } from "../types.js";
+import { childrenOnlyDirectRenderers } from "./utils.js";
 
 type RectProps = {
   fill: string;
@@ -73,29 +74,7 @@ const Rect = ({
   children,
   ...props
 }: { children?: JSXChildren } & RectProps) => {
-  if (children?.constructor === Array) {
-    for (const child of children) {
-      if (!(child !== null && typeof child === "object" && "render" in child)) {
-        throw new Error("children of Rect should only be DirectRenderers");
-      }
-    }
-
-    return new RectRenderer(props, children as DirectRenderer[]);
-  } else if (children === undefined) {
-    return new RectRenderer(props, []);
-  } else {
-    if (
-      !(
-        children !== null &&
-        typeof children === "object" &&
-        "render" in children
-      )
-    ) {
-      throw new Error("children of Rect should only be DirectRenderers");
-    }
-
-    return new RectRenderer(props, [children as DirectRenderer]);
-  }
+  return new RectRenderer(props, childrenOnlyDirectRenderers(children));
 };
 
 export default Rect;
