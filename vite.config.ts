@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     setupFiles: ["./lib/__tests__/setup.ts"],
+    coverage: {
+      reporter: ["text", "json-summary", "json", "html-spa"],
+    },
   },
 
   build: {

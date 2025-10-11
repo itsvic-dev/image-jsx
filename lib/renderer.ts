@@ -10,7 +10,13 @@ export function renderToCanvas(canvas: Canvas, root: JSXChild) {
   }
 
   const renderer = root as DirectRenderer;
-  renderer.render(canvas.getContext("2d"));
+  const context = canvas.getContext("2d");
+
+  // fill the background
+  context.fillStyle = "black";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  renderer.render(context);
 }
 
 export function render(width: number, height: number, root: JSXChild): Canvas {
