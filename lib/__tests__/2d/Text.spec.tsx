@@ -74,4 +74,11 @@ describe("Text", () => {
     );
     expect(bbox).toMatchSnapshot();
   });
+
+  it("handles null children correctly", () => {
+    const text = <Text fill="white" fontFamily="Arial" fontSize={48}></Text>;
+
+    const canvas = render(256, 256, text);
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+  });
 });
