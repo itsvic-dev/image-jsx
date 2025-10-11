@@ -8,6 +8,12 @@ export default defineConfig({
     setupFiles: ["./lib/__tests__/setup.ts"],
     coverage: {
       reporter: ["text", "json-summary", "json", "html-spa"],
+      thresholds: {
+        lines: 90,
+        branches: 90,
+        functions: 90,
+        statements: 90,
+      },
     },
   },
 

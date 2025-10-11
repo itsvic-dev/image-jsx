@@ -12,7 +12,10 @@ describe("Text", () => {
     );
 
     const canvas = render(256, 256, text);
-    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot({
+      failureThresholdType: "pixel",
+      failureThreshold: 50,
+    });
   });
 
   it("renders with custom position correctly", () => {
@@ -23,7 +26,10 @@ describe("Text", () => {
     );
 
     const canvas = render(256, 256, text);
-    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot({
+      failureThresholdType: "pixel",
+      failureThreshold: 50,
+    });
   });
 
   it("handles multiple children correctly", () => {
@@ -35,7 +41,10 @@ describe("Text", () => {
     );
 
     const canvas = render(256, 256, text);
-    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot({
+      failureThresholdType: "pixel",
+      failureThreshold: 50,
+    });
   });
 
   it("handles multiline correctly", () => {
@@ -48,7 +57,10 @@ describe("Text", () => {
     );
 
     const canvas = render(256, 256, text);
-    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot({
+      failureThresholdType: "pixel",
+      failureThreshold: 50,
+    });
   });
 
   it("calculates bounding box correctly", () => {
@@ -60,7 +72,11 @@ describe("Text", () => {
     const bbox = (text as DirectRenderer).getBoundingBox(
       new Canvas().getContext("2d")
     );
-    expect(bbox).toMatchSnapshot();
+    // these differ between mac and linux, so hardcode ranges instead
+    expect(bbox.width).toBeGreaterThan(108);
+    expect(bbox.width).toBeLessThan(109);
+    expect(bbox.height).toBeGreaterThan(47);
+    expect(bbox.height).toBeLessThan(49);
   });
 
   it("calculates bounding box of multiline text correctly", () => {
@@ -72,13 +88,19 @@ describe("Text", () => {
     const bbox = (text as DirectRenderer).getBoundingBox(
       new Canvas().getContext("2d")
     );
-    expect(bbox).toMatchSnapshot();
+    expect(bbox.width).toBeGreaterThan(127);
+    expect(bbox.width).toBeLessThan(128);
+    expect(bbox.height).toBeGreaterThan(105);
+    expect(bbox.height).toBeLessThan(107);
   });
 
   it("handles null children correctly", () => {
     const text = <Text fill="white" fontFamily="Inter" fontSize={48}></Text>;
 
     const canvas = render(256, 256, text);
-    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot({
+      failureThresholdType: "pixel",
+      failureThreshold: 50,
+    });
   });
 });
