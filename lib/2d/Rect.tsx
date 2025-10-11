@@ -55,8 +55,8 @@ class RectRenderer implements DirectRenderer {
 
     for (const child of this.children) {
       const childBbox = child.getBoundingBox(context);
-      width = Math.max(width, childBbox.width);
-      height = Math.max(height, childBbox.height);
+      width = Math.max(width, child.pos.x + childBbox.width);
+      height = Math.max(height, child.pos.y + childBbox.height);
     }
 
     return { width: this.props.w ?? width, height: this.props.h ?? height };

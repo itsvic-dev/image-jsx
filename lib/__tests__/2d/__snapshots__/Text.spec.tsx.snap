@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Text > calculates bounding box correctly 1`] = `
+{
+  "height": 46.23828125,
+  "width": 101.41000366210938,
+}
+`;

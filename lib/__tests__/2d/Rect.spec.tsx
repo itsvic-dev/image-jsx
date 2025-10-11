@@ -1,9 +1,6 @@
-import { Rect } from "@lib/2d";
+import { Rect } from "../../2d/index.js";
 import { describe, expect, it } from "vitest";
-import { render } from "@lib";
-import { toMatchImageSnapshot } from "jest-image-snapshot";
-
-expect.extend({ toMatchImageSnapshot });
+import { render } from "../../index.js";
 
 describe("Rect", () => {
   it("handles custom widths", () => {
@@ -36,6 +33,17 @@ describe("Rect", () => {
     const rect = (
       <Rect fill={"red"} w={128} h={128} x={64} y={64}>
         <Rect fill={"aqua"} w={128} h={64}></Rect>
+      </Rect>
+    );
+
+    const canvas = render(256, 256, rect);
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+  });
+
+  it("handles custom positions of children correctly", () => {
+    const rect = (
+      <Rect fill={"red"} x={16} y={16}>
+        <Rect fill={"#0000ff80"} w={32} h={32} x={32} y={32} />
       </Rect>
     );
 

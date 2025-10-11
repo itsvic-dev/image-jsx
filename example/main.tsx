@@ -1,5 +1,5 @@
-import { renderToFile } from "../lib/default.js";
-import { Rect, Text } from "../lib/2d/default.js";
+import { renderToFile } from "../lib/index.js";
+import { Rect, Text } from "../lib/2d/index.js";
 
 const Image = () => (
   <Rect fill={"darkred"}>

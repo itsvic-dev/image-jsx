@@ -43,8 +43,8 @@
     "esModuleInterop": true,
 
     "paths": {
-      "@lib": ["./lib/default.ts"],
-      "@lib/2d": ["./lib/2d/default.ts"],
+      "@lib": ["./lib/index.ts"],
+      "@lib/2d": ["./lib/2d/index.ts"],
       "@lib/jsx-runtime": ["./lib/jsx-runtime.ts"],
       "@lib/jsx-dev-runtime": ["./lib/jsx-dev-runtime.ts"],
     }
