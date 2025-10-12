@@ -1,0 +1,11 @@
+{
+  "name": "@itsvicdev/image-jsx-examples",
+  "type": "module",
+  "dependencies": {
+    "image-jsx": "workspace:^",
+    "tsx": "^4.20.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

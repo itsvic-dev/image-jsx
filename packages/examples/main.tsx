@@ -1,8 +1,3 @@
-# Image.JSX
-
-Image.JSX lets you create images by writing JSX code.
-
-```jsx
 import { renderToFile } from "image-jsx";
 import { Rect, Text } from "image-jsx/2d";
 
@@ -15,6 +10,3 @@ const Image = () => (
 );
 
 renderToFile(640, 360, "hello.png", <Image />);
-```
-
-It is intended to be used standalone.

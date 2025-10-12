@@ -2,3 +2,5 @@ onlyBuiltDependencies:
   - esbuild
   - skia-canvas
 publishBranch: trunk
+packages:
+  - packages/*

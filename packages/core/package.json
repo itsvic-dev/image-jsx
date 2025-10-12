@@ -6,12 +6,10 @@
   "keywords": [],
   "author": "it's vic! <contact@itsvic.dev>",
   "license": "MIT",
-
   "homepage": "https://github.com/itsvic-dev/image-jsx#readme",
   "bugs": {
     "url": "https://github.com/itsvic-dev/image-jsx/issues"
   },
-
   "packageManager": "pnpm@10.14.0",
   "devDependencies": {
     "@types/jest-image-snapshot": "^6.4.0",
@@ -19,7 +17,6 @@
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
     "jest-image-snapshot": "^6.5.1",
-    "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
@@ -27,7 +24,6 @@
   "dependencies": {
     "skia-canvas": "^3.0.8"
   },
-
   "scripts": {
     "test": "vitest",
     "coverage": "vitest run --coverage",
@@ -35,7 +31,6 @@
     "build": "pnpm clean; tsc -p tsconfig.dist.json",
     "prepublish": "pnpm build"
   },
-
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -54,5 +49,8 @@
       "types": "./dist/jsx-dev-runtime/index.d.ts"
     }
   },
-  "files": ["dist", "LICENSE"]
+  "files": [
+    "dist",
+    "LICENSE"
+  ]
 }
