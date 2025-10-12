@@ -1,15 +1,17 @@
 {
-  "name": "js-picture",
-  "version": "1.0.0",
+  "name": "image-jsx",
+  "version": "0.1.0",
   "description": "",
   "type": "module",
-  "scripts": {
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
-  },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "it's vic! <contact@itsvic.dev>",
+  "license": "MIT",
+
+  "homepage": "https://github.com/itsvic-dev/image-jsx#readme",
+  "bugs": {
+    "url": "https://github.com/itsvic-dev/image-jsx/issues"
+  },
+
   "packageManager": "pnpm@10.14.0",
   "devDependencies": {
     "@types/jest-image-snapshot": "^6.4.0",
@@ -24,5 +26,33 @@
   },
   "dependencies": {
     "skia-canvas": "^3.0.8"
-  }
+  },
+
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "clean": "rm -r dist",
+    "build": "pnpm clean; tsc -p tsconfig.dist.json",
+    "prepare": "pnpm build"
+  },
+
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./2d": {
+      "import": "./dist/2d/index.js",
+      "types": "./dist/2d/index.d.ts"
+    },
+    "./jsx-runtime": {
+      "import": "./dist/jsx-runtime/index.js",
+      "types": "./dist/jsx-runtime/index.d.ts"
+    },
+    "./jsx-dev-runtime": {
+      "import": "./dist/jsx-dev-runtime/index.js",
+      "types": "./dist/jsx-dev-runtime/index.d.ts"
+    }
+  },
+  "files": ["dist", "LICENSE"]
 }
