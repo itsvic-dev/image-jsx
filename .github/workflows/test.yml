@@ -18,6 +18,7 @@ jobs:
         name: "Install PNPM"
         with:
           run_install: false
+          version: 10.14.0
 
       - name: "Install Node"
         uses: actions/setup-node@v5
@@ -29,9 +30,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: "Test with coverage"
-        run: pnpm run coverage
+        run: cd packages/core; pnpm run coverage
 
       - name: "Report coverage"
         uses: davelosert/vitest-coverage-report-action@v2
         with:
           file-coverage-mode: all
+          working-directory: packages/core

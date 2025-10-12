@@ -45,8 +45,8 @@
     "paths": {
       "@lib": ["./lib/index.ts"],
       "@lib/2d": ["./lib/2d/index.ts"],
-      "@lib/jsx-runtime": ["./lib/jsx-runtime.ts"],
-      "@lib/jsx-dev-runtime": ["./lib/jsx-dev-runtime.ts"],
+      "@lib/jsx-runtime": ["./lib/jsx-runtime/index.ts"],
+      "@lib/jsx-dev-runtime": ["./lib/jsx-dev-runtime/index.ts"],
     }
   }
 }

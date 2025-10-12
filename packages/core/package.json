@@ -10,7 +10,6 @@
   "bugs": {
     "url": "https://github.com/itsvic-dev/image-jsx/issues"
   },
-  "packageManager": "pnpm@10.14.0",
   "devDependencies": {
     "@types/jest-image-snapshot": "^6.4.0",
     "@types/node": "^24.7.2",
