@@ -1,12 +1,12 @@
 {
   "name": "image-jsx",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.1",
+  "description": "Create images with JSX",
   "type": "module",
   "keywords": [],
   "author": "it's vic! <contact@itsvic.dev>",
   "license": "MIT",
-  "homepage": "https://github.com/itsvic-dev/image-jsx#readme",
+  "homepage": "https://github.com/itsvic-dev/image-jsx/tree/trunk/packages/core#readme",
   "bugs": {
     "url": "https://github.com/itsvic-dev/image-jsx/issues"
   },
@@ -49,7 +49,6 @@
     }
   },
   "files": [
-    "dist",
-    "LICENSE"
+    "dist", "README.md"
   ]
 }
