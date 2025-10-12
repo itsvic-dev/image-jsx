@@ -10,6 +10,15 @@ describe("Rect", () => {
     expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
   });
 
+  it("handles radius correctly", () => {
+    const rect = (
+      <Rect fill={"red"} w={128} h={128} x={64} y={64} radius={32} />
+    );
+
+    const canvas = render(256, 256, rect);
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+  });
+
   it("handles custom positions", () => {
     const rect = <Rect fill={"red"} w={128} h={128} x={64} y={64} />;
 

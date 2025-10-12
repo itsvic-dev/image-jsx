@@ -8,6 +8,11 @@ type RectProps = {
   h?: number;
   x?: number;
   y?: number;
+  radius?:
+    | number
+    | [number, number]
+    | [number, number, number]
+    | [number, number, number, number];
 };
 
 class RectRenderer implements DirectRenderer {
@@ -29,7 +34,17 @@ class RectRenderer implements DirectRenderer {
   render(context: CanvasRenderingContext2D): void {
     const bbox = this.getBoundingBox(context);
     context.fillStyle = this.props.fill;
-    context.fillRect(this.pos.x, this.pos.y, bbox.width, bbox.height);
+    context.beginPath();
+    context.roundRect(
+      this.pos.x,
+      this.pos.y,
+      bbox.width,
+      bbox.height,
+      this.props.radius ?? 0
+    );
+    context.closePath();
+    context.fill();
+    context.beginPath();
 
     // render children
     for (const child of this.children) {
