@@ -21,7 +21,7 @@ describe("Layout", () => {
 
   for (const direction of ["vertical", "horizontal"] as const) {
     for (const arrangement of ["start", "middle", "end"] as const) {
-      it(`renders correctly (${direction}, ${arrangement})`, () => {
+      it(`renders correctly (${direction}, arrangement ${arrangement})`, () => {
         const layout = (
           <Layout direction={direction} arrangement={arrangement}>
             <Rect w={128} h={64} fill={"red"}></Rect>
@@ -40,6 +40,47 @@ describe("Layout", () => {
             <Rect w={64} h={32} fill={"aqua"}></Rect>
             <Rect w={32} h={128} fill={"purple"}></Rect>
           </Layout>
+        );
+        const canvas = render(256, 256, layout);
+        expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+      });
+    }
+
+    for (const alignment of ["start", "middle", "end"] as const) {
+      it(`renders correctly (${direction}, alignment ${alignment})`, () => {
+        const layout = (
+          <Rect fill="white">
+            <Layout
+              direction={direction}
+              alignment={alignment}
+              w={direction === "horizontal" ? 256 : undefined}
+              h={direction === "vertical" ? 256 : undefined}
+            >
+              <Rect fill={"red"} w={32} h={32} />
+              <Rect fill={"green"} w={32} h={32} />
+              <Rect fill={"blue"} w={32} h={32} />
+            </Layout>
+          </Rect>
+        );
+        const canvas = render(256, 256, layout);
+        expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+      });
+
+      it(`renders with gaps correctly (${direction}, alignment ${alignment})`, () => {
+        const layout = (
+          <Rect fill="white">
+            <Layout
+              direction={direction}
+              alignment={alignment}
+              gap={8}
+              w={direction === "horizontal" ? 256 : undefined}
+              h={direction === "vertical" ? 256 : undefined}
+            >
+              <Rect fill={"red"} w={32} h={32} />
+              <Rect fill={"green"} w={32} h={32} />
+              <Rect fill={"blue"} w={32} h={32} />
+            </Layout>
+          </Rect>
         );
         const canvas = render(256, 256, layout);
         expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
