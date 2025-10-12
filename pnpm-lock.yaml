@@ -11,9 +11,6 @@ importers:
       skia-canvas:
         specifier: ^3.0.8
         version: 3.0.8
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
     devDependencies:
       '@types/jest-image-snapshot':
         specifier: ^6.4.0
@@ -33,9 +30,9 @@ importers:
       tsx:
         specifier: ^4.20.6
         version: 4.20.6
-      vite:
-        specifier: ^7.1.9
-        version: 7.1.9(@types/node@24.7.2)(tsx@4.20.6)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
       vite-tsconfig-paths:
         specifier: ^5.1.4
         version: 5.1.4(typescript@5.9.3)(vite@7.1.9(@types/node@24.7.2)(tsx@4.20.6))
