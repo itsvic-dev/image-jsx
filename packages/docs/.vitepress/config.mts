@@ -3,7 +3,7 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Image.JSX",
-  description: "Create images with JSX",
+  description: "Create images with JSX.",
   base: "/image-jsx/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -23,4 +23,7 @@ export default defineConfig({
       { icon: "github", link: "https://github.com/itsvic-dev/image-jsx" },
     ],
   },
+
+  lastUpdated: true,
+  cleanUrls: true,
 });
