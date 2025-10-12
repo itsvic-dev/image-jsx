@@ -1,0 +1,17 @@
+{
+  "name": "@itsvicdev/image-jsx-docs",
+  "type": "module",
+  "dependencies": {
+    "image-jsx": "workspace:^",
+    "vitepress": "^1.6.4"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
