@@ -31,9 +31,9 @@
   "scripts": {
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "clean": "rm -r dist",
+    "clean": "rm -rf dist",
     "build": "pnpm clean; tsc -p tsconfig.dist.json",
-    "prepare": "pnpm build"
+    "prepublish": "pnpm build"
   },
 
   "exports": {
