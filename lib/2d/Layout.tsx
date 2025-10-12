@@ -42,9 +42,6 @@ class LayoutRenderer implements DirectRenderer {
         ourAxisSize = ourBbox.width;
         childAxisSize = childBbox.width;
         break;
-
-      default:
-        throw new Error(`invalid direction ${this.props.direction}`);
     }
 
     switch (this.props.arrangement) {
@@ -54,9 +51,6 @@ class LayoutRenderer implements DirectRenderer {
         return ourAxisSize - childAxisSize;
       case "middle":
         return (ourAxisSize - childAxisSize) / 2;
-
-      default:
-        throw new Error(`invalid arrangement ${this.props.arrangement}`);
     }
   }
 
