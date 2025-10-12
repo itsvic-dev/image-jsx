@@ -33,7 +33,7 @@ describe("Layout", () => {
         expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
       });
 
-      it(`renders with gaps correctly (${direction}, ${arrangement})`, () => {
+      it(`renders with gaps correctly (${direction}, arrangement ${arrangement})`, () => {
         const layout = (
           <Layout gap={8} direction={direction} arrangement={arrangement}>
             <Rect w={128} h={64} fill={"red"}></Rect>
