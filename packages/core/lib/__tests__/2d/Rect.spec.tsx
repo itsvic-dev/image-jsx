@@ -1,6 +1,6 @@
-import { Rect } from "../../2d/index.js";
+import { render } from "@lib";
+import { Rect } from "@lib/2d";
 import { describe, expect, it } from "vitest";
-import { render } from "../../index.js";
 
 describe("Rect", () => {
   it("handles custom widths", () => {

@@ -2,7 +2,7 @@ import { Layout, Rect } from "@lib/2d";
 import { Canvas } from "skia-canvas";
 import { describe, it, expect } from "vitest";
 import type { DirectRenderer } from "../../types.js";
-import { render } from "../../renderer.js";
+import { render } from "@lib";
 
 describe("Layout", () => {
   it("handles zero children correctly", () => {
