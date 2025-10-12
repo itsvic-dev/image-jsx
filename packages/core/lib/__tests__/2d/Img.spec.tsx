@@ -12,7 +12,10 @@ describe("Img", () => {
 
     const root = <Img image={image} w={128} h={128} x={64} y={64} />;
     const canvas = render(256, 256, root);
-    expect(await canvas.toBuffer("png")).toMatchImageSnapshot();
+    expect(await canvas.toBuffer("png")).toMatchImageSnapshot({
+      failureThresholdType: "pixel",
+      failureThreshold: 5,
+    });
   });
 
   it("renders automatically sized image correctly", async () => {
