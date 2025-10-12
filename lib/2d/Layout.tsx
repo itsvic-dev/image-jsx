@@ -1,5 +1,5 @@
 import type { CanvasRenderingContext2D } from "skia-canvas";
-import type { DirectRenderer, JSXChildren } from "../types.js";
+import type { BoundingBox, DirectRenderer, JSXChildren } from "../types.js";
 import { childrenOnlyDirectRenderers } from "./utils.js";
 
 type LayoutClassProps = {
@@ -7,6 +7,7 @@ type LayoutClassProps = {
   x?: number;
   y?: number;
   direction: "vertical" | "horizontal";
+  arrangement: "start" | "middle" | "end";
 };
 
 class LayoutRenderer implements DirectRenderer {
@@ -27,26 +28,56 @@ class LayoutRenderer implements DirectRenderer {
     this.props.y = pos.y;
   }
 
+  // calculates the offset of the child based on the direction and arrangement properties
+  private getChildOffset(ourBbox: BoundingBox, childBbox: BoundingBox): number {
+    let ourAxisSize = 0;
+    let childAxisSize = 0;
+
+    switch (this.props.direction) {
+      case "horizontal":
+        ourAxisSize = ourBbox.height;
+        childAxisSize = childBbox.height;
+        break;
+      case "vertical":
+        ourAxisSize = ourBbox.width;
+        childAxisSize = childBbox.width;
+        break;
+    }
+
+    switch (this.props.arrangement) {
+      case "start":
+        return 0;
+      case "end":
+        return ourAxisSize - childAxisSize;
+      case "middle":
+        return (ourAxisSize - childAxisSize) / 2;
+    }
+  }
+
   render(ctx: CanvasRenderingContext2D): void {
     let cursor = 0;
+    const ourBbox = this.getBoundingBox(ctx);
 
     for (const child of this.children) {
       const bbox = child.getBoundingBox(ctx);
       if (this.props.direction === "horizontal") {
-        child.pos = { x: this.pos.x + cursor, y: this.pos.y };
+        child.pos = {
+          x: this.pos.x + cursor,
+          y: this.pos.y + this.getChildOffset(ourBbox, bbox),
+        };
         cursor += bbox.width + (this.props.gap ?? 0);
       } else {
-        child.pos = { x: this.pos.x, y: this.pos.y + cursor };
+        child.pos = {
+          x: this.pos.x + this.getChildOffset(ourBbox, bbox),
+          y: this.pos.y + cursor,
+        };
         cursor += bbox.height + (this.props.gap ?? 0);
       }
       child.render(ctx);
     }
   }
 
-  getBoundingBox(context: CanvasRenderingContext2D): {
-    width: number;
-    height: number;
-  } {
+  getBoundingBox(context: CanvasRenderingContext2D): BoundingBox {
     // calculate gaps for children
     const gaps = Math.max(0, this.children.length - 1) * (this.props.gap || 0);
 
@@ -72,9 +103,7 @@ class LayoutRenderer implements DirectRenderer {
   }
 }
 
-type LayoutProps = Omit<LayoutClassProps, "direction"> & {
-  direction?: "vertical" | "horizontal";
-};
+type LayoutProps = Partial<LayoutClassProps>;
 
 /** Automatically arranges children into a layout, similar to a flexbox. */
 const Layout = ({
@@ -82,7 +111,11 @@ const Layout = ({
   ...props
 }: { children?: JSXChildren } & LayoutProps) => {
   return new LayoutRenderer(
-    { ...props, direction: props.direction ?? "vertical" },
+    {
+      ...props,
+      direction: props.direction ?? "vertical",
+      arrangement: props.arrangement ?? "start",
+    },
     childrenOnlyDirectRenderers(children)
   );
 };

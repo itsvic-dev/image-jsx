@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import type { DirectRenderer, JSXChildren } from "../../types.js";
+import type { BoundingBox, DirectRenderer, JSXChildren } from "../../types.js";
 import type { CanvasRenderingContext2D } from "skia-canvas";
 import { childrenOnlyDirectRenderers } from "../../2d/utils.js";
 
@@ -13,10 +13,7 @@ class TestRenderer implements DirectRenderer {
   render(context: CanvasRenderingContext2D): void {
     throw new Error("Method not implemented.");
   }
-  getBoundingBox(context: CanvasRenderingContext2D): {
-    width: number;
-    height: number;
-  } {
+  getBoundingBox(context: CanvasRenderingContext2D): BoundingBox {
     throw new Error("Method not implemented.");
   }
 }
