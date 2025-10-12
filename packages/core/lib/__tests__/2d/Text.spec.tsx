@@ -33,14 +33,14 @@ describe("Text", () => {
   });
 
   it("changes position at runtime correctly", () => {
-    const text = (
+    const root = (
       <Text fill="white" fontFamily="Inter" fontSize={48}>
         hello
       </Text>
     ) as DirectRenderer;
 
-    text.pos = { x: 32, y: 32 };
-    expect(text.pos).toStrictEqual({ x: 32, y: 32 });
+    root.pos = { x: 32, y: 32 };
+    expect(root.pos).toStrictEqual({ x: 32, y: 32 });
   });
 
   it("handles multiple children correctly", () => {

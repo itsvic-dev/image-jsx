@@ -1,4 +1,4 @@
-import { render } from "@lib";
+import { render, type DirectRenderer } from "@lib";
 import { Rect } from "@lib/2d";
 import { describe, expect, it } from "vitest";
 
@@ -24,6 +24,13 @@ describe("Rect", () => {
 
     const canvas = render(256, 256, rect);
     expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+  });
+
+  it("changes position at runtime correctly", () => {
+    const root = (<Rect fill="white" />) as DirectRenderer;
+
+    root.pos = { x: 32, y: 32 };
+    expect(root.pos).toStrictEqual({ x: 32, y: 32 });
   });
 
   it("resizes to children", () => {

@@ -19,6 +19,13 @@ describe("Layout", () => {
     expect(bounds).toStrictEqual({ width: 0, height: 0 });
   });
 
+  it("changes position at runtime correctly", () => {
+    const root = (<Layout />) as DirectRenderer;
+
+    root.pos = { x: 32, y: 32 };
+    expect(root.pos).toStrictEqual({ x: 32, y: 32 });
+  });
+
   for (const direction of ["vertical", "horizontal"] as const) {
     for (const arrangement of ["start", "middle", "end"] as const) {
       it(`renders correctly (${direction}, arrangement ${arrangement})`, () => {

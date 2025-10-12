@@ -1,6 +1,6 @@
-import { render } from "@lib";
+import { render, type DirectRenderer } from "@lib";
 import { Img } from "@lib/2d";
-import { loadImage } from "skia-canvas";
+import { Image, loadImage } from "skia-canvas";
 import { describe, it, expect } from "vitest";
 
 describe("Img", () => {
@@ -27,5 +27,12 @@ describe("Img", () => {
     const root = <Img image={image} x={-512} y={-512} />;
     const canvas = render(512, 512, root);
     expect(await canvas.toBuffer("png")).toMatchImageSnapshot();
+  });
+
+  it("changes position at runtime correctly", () => {
+    const root = (<Img image={new Image()} />) as DirectRenderer;
+
+    root.pos = { x: 32, y: 32 };
+    expect(root.pos).toStrictEqual({ x: 32, y: 32 });
   });
 });
