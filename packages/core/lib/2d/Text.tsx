@@ -24,15 +24,15 @@ class TextRenderer implements DirectRenderer {
     return { x: this.props.x || 0, y: this.props.y || 0 };
   }
   set pos(pos: { x: number; y: number }) {
-    this.props.x = this.pos.x;
-    this.props.y = this.pos.y;
+    this.props.x = pos.x;
+    this.props.y = pos.y;
   }
 
   private setupCtx(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = this.props.fill;
-    ctx.font = `${this.props.fontWeight || 400} ${this.props.fontSize}px ${
+    ctx.font = `${this.props.fontWeight || 400} ${this.props.fontSize}px "${
       this.props.fontFamily
-    }`;
+    }"`;
     ctx.textBaseline = "top";
   }
 
