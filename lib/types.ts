@@ -13,10 +13,7 @@ export interface DirectRenderer {
   render(context: CanvasRenderingContext2D): void;
 
   /** Returns the bounding box of the renderer's output, without rendering to the canvas context. */
-  getBoundingBox(context: CanvasRenderingContext2D): {
-    width: number;
-    height: number;
-  };
+  getBoundingBox(context: CanvasRenderingContext2D): BoundingBox;
 }
 
 export type ComponentProps = {
@@ -39,3 +36,8 @@ export type JSXChild =
   | null;
 
 export type JSXChildren = JSXChild | JSXChild[];
+
+export type BoundingBox = {
+  width: number;
+  height: number;
+};

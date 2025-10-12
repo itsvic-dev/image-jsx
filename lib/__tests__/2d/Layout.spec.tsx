@@ -19,53 +19,33 @@ describe("Layout", () => {
     expect(bounds).toStrictEqual({ width: 0, height: 0 });
   });
 
-  it("renders correctly", () => {
-    const layout = (
-      <Layout>
-        <Rect w={128} h={64} fill={"red"}></Rect>
-        <Rect w={64} h={32} fill={"aqua"}></Rect>
-        <Rect w={32} h={128} fill={"purple"}></Rect>
-      </Layout>
-    );
-    const canvas = render(256, 256, layout);
-    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
-  });
+  for (const direction of ["vertical", "horizontal"] as const) {
+    for (const arrangement of ["start", "middle", "end"] as const) {
+      it(`renders correctly (${direction}, ${arrangement})`, () => {
+        const layout = (
+          <Layout direction={direction} arrangement={arrangement}>
+            <Rect w={128} h={64} fill={"red"}></Rect>
+            <Rect w={64} h={32} fill={"aqua"}></Rect>
+            <Rect w={32} h={128} fill={"purple"}></Rect>
+          </Layout>
+        );
+        const canvas = render(256, 256, layout);
+        expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+      });
 
-  it("renders horizontally correctly", () => {
-    const layout = (
-      <Layout direction="horizontal">
-        <Rect w={128} h={64} fill={"red"}></Rect>
-        <Rect w={64} h={32} fill={"aqua"}></Rect>
-        <Rect w={32} h={128} fill={"purple"}></Rect>
-      </Layout>
-    );
-    const canvas = render(256, 256, layout);
-    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
-  });
-
-  it("renders with gaps correctly", () => {
-    const layout = (
-      <Layout gap={8}>
-        <Rect w={128} h={64} fill={"red"}></Rect>
-        <Rect w={64} h={32} fill={"aqua"}></Rect>
-        <Rect w={32} h={128} fill={"purple"}></Rect>
-      </Layout>
-    );
-    const canvas = render(256, 256, layout);
-    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
-  });
-
-  it("renders with gaps horizontally correctly", () => {
-    const layout = (
-      <Layout gap={8} direction="horizontal">
-        <Rect w={128} h={64} fill={"red"}></Rect>
-        <Rect w={64} h={32} fill={"aqua"}></Rect>
-        <Rect w={32} h={128} fill={"purple"}></Rect>
-      </Layout>
-    );
-    const canvas = render(256, 256, layout);
-    expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
-  });
+      it(`renders with gaps correctly (${direction}, ${arrangement})`, () => {
+        const layout = (
+          <Layout gap={8} direction={direction} arrangement={arrangement}>
+            <Rect w={128} h={64} fill={"red"}></Rect>
+            <Rect w={64} h={32} fill={"aqua"}></Rect>
+            <Rect w={32} h={128} fill={"purple"}></Rect>
+          </Layout>
+        );
+        const canvas = render(256, 256, layout);
+        expect(canvas.toBufferSync("png")).toMatchImageSnapshot();
+      });
+    }
+  }
 
   it("calculates bounding boxes for children correctly", () => {
     const layout = (
