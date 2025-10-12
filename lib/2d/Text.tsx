@@ -70,7 +70,7 @@ const Text = ({
 }: { children?: JSXChildren } & SharedTextProps) => {
   if (children?.constructor === Array) {
     return new TextRenderer(
-      children.map((a) => a?.toString() || "null").join(" "),
+      children.map((a) => a?.toString() || "null").join(""),
       props
     );
   } else {

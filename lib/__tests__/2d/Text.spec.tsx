@@ -94,8 +94,22 @@ describe("Text", () => {
     expect(bbox.height).toBeLessThan(107);
   });
 
-  it("handles null children correctly", () => {
+  it("handles null child correctly", () => {
     const text = <Text fill="white" fontFamily="Inter" fontSize={48}></Text>;
+
+    const canvas = render(256, 256, text);
+    expect(canvas.toBufferSync("png")).toMatchImageSnapshot({
+      failureThresholdType: "pixel",
+      failureThreshold: 50,
+    });
+  });
+
+  it("handles null children correctly", () => {
+    const text = (
+      <Text fill="white" fontFamily="Inter" fontSize={48}>
+        hello {null}
+      </Text>
+    );
 
     const canvas = render(256, 256, text);
     expect(canvas.toBufferSync("png")).toMatchImageSnapshot({
