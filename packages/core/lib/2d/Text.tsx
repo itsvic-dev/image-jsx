@@ -1,11 +1,12 @@
 import type { CanvasRenderingContext2D } from "skia-canvas";
-import type { DirectRenderer, JSXChildren } from "../types.js";
+import type { DirectRenderer, JSXChildren, Style } from "../types.js";
+import { resolveStyle } from "../internals.js";
 
 type SharedTextProps = {
   fontFamily: string;
   fontSize: number;
   fontWeight?: number;
-  fill: string;
+  fill?: Style;
 
   x?: number;
   y?: number;
@@ -29,7 +30,6 @@ class TextRenderer implements DirectRenderer {
   }
 
   private setupCtx(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = this.props.fill;
     ctx.font = `${this.props.fontWeight || 400} ${this.props.fontSize}px "${
       this.props.fontFamily
     }"`;
@@ -55,6 +55,15 @@ class TextRenderer implements DirectRenderer {
 
   render(ctx: CanvasRenderingContext2D): void {
     this.setupCtx(ctx);
+    if (this.props.fill) {
+      ctx.fillStyle = resolveStyle(
+        ctx,
+        this.props.fill,
+        this.pos,
+        this.getBoundingBox(ctx)
+      );
+    }
+
     let curY = this.pos.y;
     for (const line of this.text.split("\n")) {
       const metrics = ctx.measureText(line);

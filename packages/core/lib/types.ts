@@ -1,6 +1,25 @@
 import type { CanvasRenderingContext2D } from "skia-canvas";
 
-type Position = { x: number; y: number };
+export type Position = { x: number; y: number };
+
+export type Style = string | LinearGradient;
+
+export type GradientDirection = "to bottom" | "to top";
+
+export type GradientStop = {
+  at: number;
+  color: string;
+};
+
+export type LinearGradient = {
+  gradient: "linear";
+  positions?: {
+    start: Position;
+    end: Position;
+  };
+  stops: GradientStop[];
+  direction?: GradientDirection;
+};
 
 /**
  * `DirectRenderer`s render stuff directly to the underlying Canvas.

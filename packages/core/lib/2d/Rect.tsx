@@ -1,9 +1,10 @@
 import type { CanvasRenderingContext2D } from "skia-canvas";
-import type { DirectRenderer, JSXChildren } from "../types.js";
+import type { DirectRenderer, JSXChildren, Style } from "../types.js";
 import { childrenOnlyDirectRenderers } from "./utils.js";
+import { resolveStyle } from "../internals.js";
 
 type RectProps = {
-  fill: string;
+  fill?: Style;
   w?: number;
   h?: number;
   x?: number;
@@ -33,7 +34,14 @@ class RectRenderer implements DirectRenderer {
 
   render(context: CanvasRenderingContext2D): void {
     const bbox = this.getBoundingBox(context);
-    context.fillStyle = this.props.fill;
+    if (this.props.fill) {
+      context.fillStyle = resolveStyle(
+        context,
+        this.props.fill,
+        this.pos,
+        bbox
+      );
+    }
     context.beginPath();
     context.roundRect(
       this.pos.x,
