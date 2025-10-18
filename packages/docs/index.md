@@ -10,6 +10,9 @@ hero:
     - theme: brand
       text: Getting Started
       link: /getting-started
+    - theme: alt
+      text: API Reference
+      link: /api/main
 # features:
 #   - title: Feature A
 #     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit

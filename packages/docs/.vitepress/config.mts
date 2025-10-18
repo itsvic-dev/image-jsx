@@ -10,12 +10,20 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Get Started", link: "/getting-started" },
+      { text: "API Reference", link: "/api" },
     ],
 
     sidebar: [
       {
         text: "Basics",
         items: [{ text: "Getting Started", link: "/getting-started" }],
+      },
+      {
+        text: "API Reference",
+        items: [
+          { text: "image-jsx", link: "/api/main" },
+          { text: "image-jsx/2d", link: "/api/2d" },
+        ],
       },
     ],
 
