@@ -8,6 +8,29 @@ import type {
 
 type CanvasStyle = string | CanvasGradient;
 
+function splitDirection(
+  direction: GradientDirection
+): ["top" | "bottom" | undefined, "left" | "right" | undefined] {
+  switch (direction) {
+    case "to bottom":
+      return ["bottom", undefined];
+    case "to top":
+      return ["top", undefined];
+    case "to left":
+      return [undefined, "left"];
+    case "to right":
+      return [undefined, "right"];
+    case "to top left":
+      return ["top", "left"];
+    case "to top right":
+      return ["top", "right"];
+    case "to bottom left":
+      return ["bottom", "left"];
+    case "to bottom right":
+      return ["bottom", "right"];
+  }
+}
+
 export function resolveStyle(
   ctx: CanvasRenderingContext2D,
   style: Style,
@@ -16,38 +39,51 @@ export function resolveStyle(
 ): CanvasStyle {
   if (typeof style === "string") return style;
 
-  if ("gradient" in style && style.gradient === "linear") {
-    let startX = 0;
-    let startY = 0;
-    let endX = 0;
-    let endY = 0;
+  if (
+    typeof style === "object" &&
+    "gradient" in style &&
+    style.gradient === "linear"
+  ) {
+    let startX = pos.x;
+    let startY = pos.y;
+    let endX = pos.x;
+    let endY = pos.y;
 
-    switch (style.direction) {
-      case "to bottom":
-        startX = pos.x;
-        startY = pos.y;
-        endX = pos.x;
-        endY = pos.y + bbox.height;
-        break;
+    if (!style.direction) {
+      if (style.positions === undefined) {
+        throw new Error(
+          "linear gradients must have a direction or start/end points"
+        );
+      }
+    } else {
+      const directions = splitDirection(style.direction);
 
-      case "to top":
-        startX = pos.x;
-        startY = pos.y + bbox.height;
-        endX = pos.x;
-        endY = pos.y;
-        break;
+      switch (directions[0]) {
+        case "top":
+          startY = pos.y + bbox.height;
+          endY = pos.y;
+          break;
+        case "bottom":
+          startY = pos.y;
+          endY = pos.y + bbox.height;
+          break;
+      }
 
-      case undefined:
-        if (style.positions === undefined) {
-          throw new Error(
-            "linear gradients must have a direction or start/end points"
-          );
-        }
+      switch (directions[1]) {
+        case "left":
+          startX = pos.x;
+          endX = pos.x + bbox.width;
+          break;
+        case "right":
+          startX = pos.x + bbox.width;
+          endX = pos.x;
+          break;
+      }
     }
 
     const gradient = ctx.createLinearGradient(
-      style.positions?.start.x ?? pos.x,
-      style.positions?.start.y ?? pos.y,
+      style.positions?.start.x ?? startX,
+      style.positions?.start.y ?? startY,
       style.positions?.end.x ?? endX,
       style.positions?.end.y ?? endY
     );

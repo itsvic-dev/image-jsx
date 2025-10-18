@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Internals > fails on ambiguous gradients 1`] = `[Error: linear gradients must have a direction or start/end points]`;
+
+exports[`Internals > fails on invalid styles 1`] = `[Error: unknown style passed: 123]`;

@@ -4,7 +4,15 @@ export type Position = { x: number; y: number };
 
 export type Style = string | LinearGradient;
 
-export type GradientDirection = "to bottom" | "to top";
+export type GradientDirection =
+  | "to bottom"
+  | "to top"
+  | "to left"
+  | "to right"
+  | "to top left"
+  | "to top right"
+  | "to bottom left"
+  | "to bottom right";
 
 export type GradientStop = {
   at: number;
