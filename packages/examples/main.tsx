@@ -1,4 +1,4 @@
-import { renderToFile } from "image-jsx";
+import { linearGradient, renderToFile } from "image-jsx";
 import { Layout, Rect, Text } from "image-jsx/2d";
 
 const i18nKeys = {
@@ -24,10 +24,16 @@ const i18n = (
 
 const Image = ({ lng }: { lng: keyof typeof i18nKeys }) => (
   <Rect fill="#10101b" w={1280} h={720}>
-    <Rect fill="#16162a">
-      <Layout w={640} h={720} arrangement="middle" alignment="middle" gap={32}>
+    <Rect fill="#16162a" x={32} y={32} radius={64}>
+      <Layout
+        w={640 - 64}
+        h={720 - 64}
+        arrangement="middle"
+        alignment="middle"
+        gap={32}
+      >
         <Text
-          fill="white"
+          fill={linearGradient(["purple", "yellow"], "to bottom")}
           fontFamily="SF Pro Display"
           fontSize={48}
           fontWeight={700}
